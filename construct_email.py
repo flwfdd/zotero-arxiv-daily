@@ -93,7 +93,8 @@ def get_block_html(title:str, authors:str, rate:str,arxiv_id:str, abstract:str, 
 
     <tr>
         <td style="padding: 8px 0;">
-            <a href="{pdf_url}" style="display: inline-block; text-decoration: none; font-size: 14px; font-weight: bold; color: #fff; background-color: #d9534f; padding: 8px 16px; border-radius: 4px;">PDF</a>
+            <a href="{pdf_url}" style="display: inline-block; text-decoration: none; font-size: 14px; font-weight: bold; color: #fff; background-color: #d9534f; padding: 8px 16px; border-radius: 4px;" target="_blank">PDF</a>
+            <a href="https://papers.cool/arxiv/{arxiv_id}" style="display: inline-block; text-decoration: none; font-size: 14px; font-weight: bold; color: #fff; background-color: #32a852; padding: 8px 16px; border-radius: 4px;" target="_blank">Cool</a>
             {code}
         </td>
     </tr>
