@@ -22,7 +22,7 @@ class LLM:
 
     def generate(self, messages: list[dict]) -> str:
         if isinstance(self.llm, OpenAI):
-            max_retries = 3
+            max_retries = 5  # 增加重试次数
             for attempt in range(max_retries):
                 try:
                     response = self.llm.chat.completions.create(messages=messages, temperature=0, model=self.model)
@@ -31,7 +31,10 @@ class LLM:
                     logger.error(f"Attempt {attempt + 1} failed: {e}")
                     if attempt == max_retries - 1:
                         raise
-                    sleep(3)
+                    # 指数退避策略
+                    sleep_time = 5 * (2 ** attempt)  # 5, 10, 20, 40 秒
+                    logger.info(f"Retrying in {sleep_time} seconds...")
+                    sleep(sleep_time)
             return response.choices[0].message.content
         else:
             response = self.llm.create_chat_completion(messages=messages,temperature=0)
